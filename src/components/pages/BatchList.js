@@ -129,7 +129,7 @@ const BatchList = () => {
       }
     } catch (error) {
       console.error("Error triggering notification API", error);
-      alert("Server Error: Make sure the alerts-backend is running on port 5000.");
+      alert("Server Error: Make sure the backend is responding.");
     } finally {
       setIsNotifying(false);
     }

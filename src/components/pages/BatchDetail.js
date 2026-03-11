@@ -89,7 +89,7 @@ const BatchDetail = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/notify-delay', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/notify-delay`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -102,7 +102,7 @@ const BatchDetail = () => {
       }
     } catch (error) {
       console.error("Error triggering notification API", error);
-      alert("Server Error: Make sure the alerts-backend is running on port 5000.");
+      alert("Server Error: Make sure the backend is responding.");
     } finally {
       setIsNotifying(false);
     }

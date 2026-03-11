@@ -45,7 +45,7 @@ const CreateContainer = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    fetch("/fetch-devices", { credentials: "include" })
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/fetch-devices`, { credentials: "include" })
       .then(res => res.json())
       .then(data => {
         if (data.success) setFetchedDevices(data.deviceData || []);
@@ -92,7 +92,7 @@ const CreateContainer = () => {
     }];
 
     try {
-      const res = await fetch("/create-shipment", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/create-shipment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -124,8 +124,8 @@ const CreateContainer = () => {
 
   if (fetchedDevices === null) return <LoadingPage />;
 
-  const InputField = ({ label, name, type = "text", icon: Icon, placeholder, children }) => (
-    <div>
+  const renderInputField = ({ label, name, type = "text", icon: Icon, placeholder, children }) => (
+    <div key={name}>
       <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>
       <div className="relative">
         {Icon && <Icon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4CAF50] pointer-events-none" />}
@@ -178,8 +178,8 @@ const CreateContainer = () => {
             <Hash size={18} /> Shipment Identification
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField label="Supplier URN" name="urn" icon={Leaf} placeholder="e.g. farm-urn-001" />
-            <InputField label="Shipment ID" name="shipmentId" icon={Package} placeholder="e.g. SHP-004" />
+            {renderInputField({ label: "Supplier URN", name: "urn", icon: Leaf, placeholder: "e.g. farm-urn-001" })}
+            {renderInputField({ label: "Shipment ID", name: "shipmentId", icon: Package, placeholder: "e.g. SHP-004" })}
           </div>
         </div>
 
@@ -191,7 +191,7 @@ const CreateContainer = () => {
             <Truck size={18} /> Logistics &amp; Shipping
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField label="Receiver/Client Username" name="endUser" icon={User} placeholder="e.g. john_receiver" />
+            {renderInputField({ label: "Receiver/Client Username", name: "endUser", icon: User, placeholder: "e.g. john_receiver" })}
 
             {/* IoT Container ID */}
             <div>
@@ -212,7 +212,7 @@ const CreateContainer = () => {
               {errors.containerId && <p className="text-red-500 text-xs mt-1">{errors.containerId}</p>}
             </div>
 
-            <InputField label="Tamper Seal Number" name="tamperSealNo" icon={Shield} placeholder="e.g. TS-001" />
+            {renderInputField({ label: "Tamper Seal Number", name: "tamperSealNo", icon: Shield, placeholder: "e.g. TS-001" })}
 
             {/* Delivery Status */}
             <div>
@@ -258,9 +258,9 @@ const CreateContainer = () => {
               </div>
             </div>
 
-            <InputField label="Quantity" name="quantity" type="number" icon={Package} placeholder="e.g. 50" />
-            <InputField label="Harvest/Manufacturing Date" name="manufacturingDate" type="date" icon={Calendar} />
-            <InputField label="Expiry Date" name="expiryDate" type="date" icon={Calendar} />
+            {renderInputField({ label: "Quantity", name: "quantity", type: "number", icon: Package, placeholder: "e.g. 50" })}
+            {renderInputField({ label: "Harvest/Manufacturing Date", name: "manufacturingDate", type: "date", icon: Calendar })}
+            {renderInputField({ label: "Expiry Date", name: "expiryDate", type: "date", icon: Calendar })}
           </div>
         </div>
 
