@@ -86,10 +86,7 @@ const GeoCheckDemo2 = () => {
 
                 const line = turf.lineString([[point1[1], point1[0]], [point2[1], point2[0]]]);
                 const buffered = turf.buffer(line, 10, { units: "kilometers" });
-                setBuffer(buffered);
-
                 const geoFenceCoords = buffered.geometry.coordinates[0].map(([lon, lat]) => [lat, lon]);
-                setGeoFenceCoords(geoFenceCoords);
 
                 if (geoFence) geoFence.setLatLngs(geoFenceCoords);
                 else setGeoFence(L.polygon(geoFenceCoords, { color: "red", weight: 2, fillOpacity: 0.3 }).addTo(map));
@@ -137,7 +134,6 @@ const GeoCheckDemo2 = () => {
         if (marker2) { marker2.remove(); setMarker2(null); }
         if (routeLine) { routeLine.remove(); setRouteLine(null); }
         if (geoFence) { geoFence.remove(); setGeoFence(null); }
-        setBuffer(null);
         if (map) map.off("click");
     };
 
