@@ -20,8 +20,6 @@ const GeoCheckDemo2 = () => {
     const [routeLine, setRouteLine] = useState(null);
     const [geoFence, setGeoFence] = useState(null);
     const [response, setResponse] = useState("");
-    const [buffer, setBuffer] = useState(null);
-    const [geoFenceCoords, setGeoFenceCoords] = useState([]);
     const [loading, setLoading] = useState(false);
 
     // Initialize the map

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from './Loading';
-import { Users, UserPlus, Phone, Briefcase, Mail, Shield, User } from 'lucide-react';
+import { Users, UserPlus, Phone, Shield, User } from 'lucide-react';
 
 const UserList = () => {
   const navigate = useNavigate();

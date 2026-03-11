@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingPage from './Loading';
-import { Package, Truck, Box, User, ArrowLeft, CheckCircle, Shield, AlertCircle, Calendar, Hash, Leaf, BellRing } from 'lucide-react';
+import { Package, Truck, Box, User, ArrowLeft, CheckCircle, Shield, AlertCircle, Calendar, Leaf, BellRing } from 'lucide-react';
 import { Dcontext } from '../../context/DataContext';
 
 const BatchDetail = () => {

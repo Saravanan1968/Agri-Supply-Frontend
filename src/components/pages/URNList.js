@@ -5,7 +5,7 @@ import LoadingPage from './Loading';
 import { Factory, MapPin, Search } from 'lucide-react';
 
 const BatchList = () => {
-  const { isManufacturer } = useContext(Dcontext);
+  const { } = useContext(Dcontext);
   const [batches, setBatches] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 

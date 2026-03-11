@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import LoadingPage from './components/pages/Loading';
 import Header from './components/blocks/Header';
@@ -15,9 +16,7 @@ import UserList from './components/pages/UserList';
 import UserDetail from './components/pages/UserDetail';
 import DeviceList from './components/pages/DeviceList';
 import DeviceDetail from './components/pages/DeviceDetail';
-import { useContext } from 'react';
 import { Dcontext } from './context/DataContext';
-import AccessDenied from './components/pages/AccessDenied';
 import CreateContainer from './components/pages/CreateContainer';
 import CreateProduce from './components/pages/CreateProduce';
 import ProduceList from './components/pages/ProduceList';
@@ -26,7 +25,7 @@ import GeoTracking2 from './components/pages/GeoTracking2'
 import EmailStatus from './components/pages/EmailStatus';
 
 function App() {
-  const { isAuth, isLoading, isAdmin, isManufacturer, isCheckpoint1, isCheckpoint2, currentUser } = useContext(Dcontext)
+  const { isAuth, isLoading, currentUser } = useContext(Dcontext)
 
   if (isLoading) {
     return <LoadingPage />;

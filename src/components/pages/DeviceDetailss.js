@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LoadingPage from "./Loading";
 import {
-  Activity, Thermometer, Droplets, MapPin, Lock, Unlock,
-  Calendar, Cloud, CheckCircle, AlertTriangle, X
+  Activity, MapPin, Lock, Unlock,
+  Calendar, Cloud, X
 } from 'lucide-react';
 
 const DeviceDetails = () => {

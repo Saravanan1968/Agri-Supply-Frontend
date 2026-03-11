@@ -78,7 +78,7 @@ const UserDetail = () => {
         console.log('Trouble in connecting to the Server: ', err)
         // alert("Trouble in connecting to the Server! Please try again later.")
       })
-  }, [])
+  }, [userId])
 
   if (fetchedUser === null) {
     return <LoadingPage />;

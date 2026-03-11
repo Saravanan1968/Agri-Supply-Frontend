@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoadingOverlay from "./ResponseWaiting";
-import { User, Lock, ArrowRight, Shield, Globe, Activity, Truck, CheckCircle } from 'lucide-react';
+import { User, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -48,15 +48,8 @@ const LoginPage = () => {
     }
   };
 
-  const FeatureCard = ({ icon: Icon, title, description }) => (
-    <div className="glass-card p-6 hover:bg-white/50 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group">
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center mb-4 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-        <Icon className="text-white" size={24} />
-      </div>
-      <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{title}</h3>
-      <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">{description}</p>
-    </div>
-  );
+  // FeatureCard removed as it's unused
+
 
   return (
     <div className="flex flex-col gap-20 pb-20 overflow-x-hidden">

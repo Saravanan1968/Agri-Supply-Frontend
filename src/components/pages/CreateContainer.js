@@ -38,7 +38,7 @@ const InputField = ({ label, name, type = "text", icon: Icon, placeholder, value
 );
 
 const CreateContainer = () => {
-  const { currentUser, isManufacturer } = useContext(Dcontext);
+  const { currentUser } = useContext(Dcontext);
   const [fetchedDevices, setFetchedDevices] = useState(null);
   const [loader, setLoader] = useState(false);
   const [errors, setErrors] = useState({});

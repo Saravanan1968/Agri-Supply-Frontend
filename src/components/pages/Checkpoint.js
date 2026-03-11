@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Dcontext } from '../../context/DataContext'
-import { ScanLine, Package, Truck, CheckCircle2, AlertTriangle, Search, Loader2, ChevronDown } from 'lucide-react'
+import { ScanLine, Package, CheckCircle2, AlertTriangle, Search, Loader2, ChevronDown } from 'lucide-react'
 
 const STATUS_OPTIONS = {
   driver: [

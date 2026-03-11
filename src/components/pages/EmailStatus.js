@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LoadingOverlay from './ResponseWaiting';
-import { Mail, ShieldAlert, CheckCircle, XCircle } from 'lucide-react';
+import { Mail, CheckCircle, XCircle } from 'lucide-react';
 
 function EmailStatus() {
 

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from './Loading';
-import { Cpu, Lock, Unlock, Calendar, ArrowRight, Search, Server } from 'lucide-react';
+import { Cpu, Lock, Unlock, Calendar, ArrowRight, Server } from 'lucide-react';
 
 const DeviceList = () => {
   const navigate = useNavigate();
   const [fetchedDevices, setFetchedDevices] = useState(null)
   const [lockStatus, setLockStatus] = useState(null)
-  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/fetch-devices`, {
