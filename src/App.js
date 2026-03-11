@@ -14,7 +14,7 @@ import CreateUser from './components/pages/CreateUser';
 import UserList from './components/pages/UserList';
 import UserDetail from './components/pages/UserDetail';
 import DeviceList from './components/pages/DeviceList';
-import DeviceDetail from './components/pages/DeviceDetailss';
+import DeviceDetail from './components/pages/DeviceDetail';
 import { useContext } from 'react';
 import { Dcontext } from './context/DataContext';
 import AccessDenied from './components/pages/AccessDenied';
