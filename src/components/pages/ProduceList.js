@@ -9,13 +9,24 @@ const ProduceList = () => {
       .then(res => res.json())
       .then(data => {
         if (data.success && Array.isArray(data.data)) {
-          const mapped = data.data.map(record => ({
-            urn: record.urn,
-            updatedAt: record.updatedAt,
-            produceNames: record.produceNames || [],
-            produceQuantities: record.produceQuantities || [],
-            totalQuantity: (record.produceQuantities || []).reduce((a, b) => a + b, 0)
-          }));
+          const mapped = data.data.map(record => {
+            const consolidated = {};
+            const names = record.produceNames || [];
+            const quantities = record.produceQuantities || [];
+
+            names.forEach((name, i) => {
+              const trimmedName = name.trim();
+              consolidated[trimmedName] = (consolidated[trimmedName] || 0) + quantities[i];
+            });
+
+            return {
+              urn: record.urn,
+              updatedAt: record.updatedAt,
+              produceNames: Object.keys(consolidated),
+              produceQuantities: Object.values(consolidated),
+              totalQuantity: Object.values(consolidated).reduce((a, b) => a + b, 0)
+            };
+          });
           setProduceData(mapped);
         } else {
           setProduceData([]);

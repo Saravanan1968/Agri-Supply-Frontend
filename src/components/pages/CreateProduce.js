@@ -22,21 +22,17 @@ const CreateProduceData = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (produceInfo !== null) {
-      if (produceInfo[0] !== "" || produceInfo[1].length !== 0 || produceInfo[2].length !== 0) {
-        if (produceInfo[1].length === produceInfo[2].length) {
-          setProduceList((prev) => {
-            let tempArr = [...prev];
-            produceInfo[1].forEach((data, i) => {
-              tempArr.push({
-                produceName: data,
-                existingQuantity: produceInfo[2][i],
-                addedQuantity: 0,
-              });
-            });
-            return tempArr;
-          });
-        }
+    if (produceInfo && Array.isArray(produceInfo) && produceInfo.length >= 3) {
+      const names = produceInfo[1];
+      const quantities = produceInfo[2];
+
+      if (Array.isArray(names) && Array.isArray(quantities) && names.length === quantities.length) {
+        const initialList = names.map((name, i) => ({
+          produceName: name,
+          existingQuantity: quantities[i],
+          addedQuantity: 0,
+        }));
+        setProduceList(initialList);
       }
     }
   }, [produceInfo]);
