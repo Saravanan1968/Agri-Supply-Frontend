@@ -51,7 +51,7 @@ const BatchDetail = () => {
     );
   };
 
-  const handleUpdateStatus = async (status) => {
+  const handleUpdateStatus = async (status, silent = false) => {
     setIsUpdatingStatus(true);
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/update-shipment-status`, {
@@ -63,18 +63,19 @@ const BatchDetail = () => {
       const data = await res.json();
       if (data.success) {
         setShipment(prev => ({ ...prev, status }));
-        alert(`Shipment status updated to ${status}`);
+        if (!silent) alert(`Shipment status updated to ${status}`);
       } else {
-        alert(data.message || 'Failed to update status.');
+        if (!silent) alert(data.message || 'Failed to update status.');
       }
     } catch {
-      alert('Connection error. Please try again.');
+      if (!silent) alert('Connection error. Please try again.');
     }
     setIsUpdatingStatus(false);
   };
 
   const handleNotifyDelay = async () => {
-    await handleUpdateStatus('Delayed');
+    // 1. Update status in MongoDB silently
+    await handleUpdateStatus('Delayed', true);
 
     setIsNotifying(true);
     const payload = {
@@ -92,11 +93,12 @@ const BatchDetail = () => {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/notify-delay`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(payload)
       });
       const data = await response.json();
       if (data.success) {
-        alert('Notification successfully dispatched!');
+        alert(`Notification successfully dispatched to recipients for ${shipment.shipmentId}!`);
       } else {
         alert('Failed to send notification: ' + data.message);
       }

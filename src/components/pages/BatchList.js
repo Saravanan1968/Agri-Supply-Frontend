@@ -71,8 +71,8 @@ const BatchList = () => {
     }
   };
 
-  const handleUpdateStatus = async (e, batchId, status) => {
-    e.stopPropagation();
+  const handleUpdateStatus = async (e, batchId, status, silent = false) => {
+    if (e) e.stopPropagation();
     setIsUpdatingStatus(true);
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/update-shipment-status`, {
@@ -84,12 +84,12 @@ const BatchList = () => {
       const data = await res.json();
       if (data.success) {
         setBatches(prev => prev.map(b => b.id === batchId ? { ...b, status } : b));
-        alert(`Shipment status updated to ${status}`);
+        if (!silent) alert(`Shipment status updated to ${status}`);
       } else {
-        alert(data.message || 'Failed to update status.');
+        if (!silent) alert(data.message || 'Failed to update status.');
       }
     } catch {
-      alert('Connection error. Please try again.');
+      if (!silent) alert('Connection error. Please try again.');
     }
     setIsUpdatingStatus(false);
   };
@@ -97,8 +97,8 @@ const BatchList = () => {
   const handleNotifyDelay = async (e, batch) => {
     e.stopPropagation();
 
-    // 1. Update status in MongoDB
-    await handleUpdateStatus(e, batch.id, 'Delayed');
+    // 1. Update status in MongoDB silently so it doesn't block the notification flow
+    await handleUpdateStatus(null, batch.id, 'Delayed', true);
 
     // 2. Send Delay Email/SMS to Admin, Manufacturer, and Receiver
     setIsNotifying(true);
@@ -117,13 +117,14 @@ const BatchList = () => {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/notify-delay`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(payload)
       });
 
       const data = await response.json();
 
       if (data.success) {
-        alert(`Notification successfully dispatched to ${batch.urn}!`);
+        alert(`Notification successfully dispatched to recipients for ${batch.id}!`);
       } else {
         alert('Failed to send notification: ' + data.message);
       }
