@@ -19,6 +19,24 @@ const produceOptions = [
 
 const statusOptions = ["Shipped", "In Transit", "Delivered", "Pending", "Delayed"];
 
+const InputField = ({ label, name, type = "text", icon: Icon, placeholder, value, onChange, error }) => (
+  <div>
+    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>
+    <div className="relative">
+      {Icon && <Icon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4CAF50] pointer-events-none" />}
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`w-full ${Icon ? "pl-9" : "pl-4"} pr-4 py-2.5 rounded-xl border ${error ? "border-red-400 bg-red-50" : "border-gray-200 dark:border-white/10 bg-white dark:bg-white/5"} text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/40 transition-all`}
+      />
+    </div>
+    {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+  </div>
+);
+
 const CreateContainer = () => {
   const { currentUser, isManufacturer } = useContext(Dcontext);
   const [fetchedDevices, setFetchedDevices] = useState(null);
@@ -124,26 +142,6 @@ const CreateContainer = () => {
 
   if (fetchedDevices === null) return <LoadingPage />;
 
-  const renderInputField = ({ label, name, type = "text", icon: Icon, placeholder, children }) => (
-    <div key={name}>
-      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>
-      <div className="relative">
-        {Icon && <Icon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4CAF50] pointer-events-none" />}
-        {children || (
-          <input
-            type={type}
-            name={name}
-            value={form[name]}
-            onChange={handleChange}
-            placeholder={placeholder}
-            className={`w-full ${Icon ? "pl-9" : "pl-4"} pr-4 py-2.5 rounded-xl border ${errors[name] ? "border-red-400 bg-red-50" : "border-gray-200 dark:border-white/10 bg-white dark:bg-white/5"} text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/40 transition-all`}
-          />
-        )}
-      </div>
-      {errors[name] && <p className="text-red-500 text-xs mt-1">{errors[name]}</p>}
-    </div>
-  );
-
   const getDeviceOptions = () => {
     if (Array.isArray(fetchedDevices) && fetchedDevices.length > 0) {
       return fetchedDevices.map((d, i) => (
@@ -178,8 +176,8 @@ const CreateContainer = () => {
             <Hash size={18} /> Shipment Identification
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {renderInputField({ label: "Supplier URN", name: "urn", icon: Leaf, placeholder: "e.g. farm-urn-001" })}
-            {renderInputField({ label: "Shipment ID", name: "shipmentId", icon: Package, placeholder: "e.g. SHP-004" })}
+            <InputField label="Supplier URN" name="urn" icon={Leaf} placeholder="e.g. farm-urn-001" value={form.urn} onChange={handleChange} error={errors.urn} />
+            <InputField label="Shipment ID" name="shipmentId" icon={Package} placeholder="e.g. SHP-004" value={form.shipmentId} onChange={handleChange} error={errors.shipmentId} />
           </div>
         </div>
 
@@ -191,7 +189,7 @@ const CreateContainer = () => {
             <Truck size={18} /> Logistics &amp; Shipping
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {renderInputField({ label: "Receiver/Client Username", name: "endUser", icon: User, placeholder: "e.g. john_receiver" })}
+            <InputField label="Receiver/Client Username" name="endUser" icon={User} placeholder="e.g. john_receiver" value={form.endUser} onChange={handleChange} error={errors.endUser} />
 
             {/* IoT Container ID */}
             <div>
@@ -212,7 +210,7 @@ const CreateContainer = () => {
               {errors.containerId && <p className="text-red-500 text-xs mt-1">{errors.containerId}</p>}
             </div>
 
-            {renderInputField({ label: "Tamper Seal Number", name: "tamperSealNo", icon: Shield, placeholder: "e.g. TS-001" })}
+            <InputField label="Tamper Seal Number" name="tamperSealNo" icon={Shield} placeholder="e.g. TS-001" value={form.tamperSealNo} onChange={handleChange} error={errors.tamperSealNo} />
 
             {/* Delivery Status */}
             <div>
@@ -258,9 +256,9 @@ const CreateContainer = () => {
               </div>
             </div>
 
-            {renderInputField({ label: "Quantity", name: "quantity", type: "number", icon: Package, placeholder: "e.g. 50" })}
-            {renderInputField({ label: "Harvest/Manufacturing Date", name: "manufacturingDate", type: "date", icon: Calendar })}
-            {renderInputField({ label: "Expiry Date", name: "expiryDate", type: "date", icon: Calendar })}
+            <InputField label="Quantity" name="quantity" type="number" icon={Package} placeholder="e.g. 50" value={form.quantity} onChange={handleChange} error={errors.quantity} />
+            <InputField label="Harvest/Manufacturing Date" name="manufacturingDate" type="date" icon={Calendar} value={form.manufacturingDate} onChange={handleChange} error={errors.manufacturingDate} />
+            <InputField label="Expiry Date" name="expiryDate" type="date" icon={Calendar} value={form.expiryDate} onChange={handleChange} error={errors.expiryDate} />
           </div>
         </div>
 
