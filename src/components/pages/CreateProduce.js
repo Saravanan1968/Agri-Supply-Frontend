@@ -80,16 +80,21 @@ const CreateProduceData = () => {
     "AgriSupply - Seed Packets",
   ];
 
-  const handleQuantityChange = (index, value) => {
+  const handleQuantityChange = (produceName, value) => {
     setProduceList((prevList) => {
       const updatedList = [...prevList];
-      const produce = updatedList[index];
+      const existingIndex = updatedList.findIndex((item) => item.produceName === produceName);
 
-      if (produce) {
-        produce.addedQuantity = value ? parseInt(value) : 0;
+      if (existingIndex !== -1) {
+        // Update existing item by matching name
+        updatedList[existingIndex] = {
+          ...updatedList[existingIndex],
+          addedQuantity: value ? parseInt(value) : 0,
+        };
       } else {
+        // Add a new item if it doesn't exist in the list yet
         updatedList.push({
-          produceName: produceOptions[index],
+          produceName: produceName,
           existingQuantity: 0,
           addedQuantity: value ? parseInt(value) : 0,
         });
@@ -259,7 +264,7 @@ const CreateProduceData = () => {
                               className="w-24 px-3 py-2 bg-background-darker border border-white/10 rounded-lg text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-center placeholder-gray-600"
                               placeholder="0"
                               min="0"
-                              onChange={(e) => handleQuantityChange(index, e.target.value)}
+                              onChange={(e) => handleQuantityChange(produce, e.target.value)}
                             />
                           </div>
                         </div>
