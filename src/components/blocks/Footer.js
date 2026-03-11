@@ -32,7 +32,7 @@ const Footer = () => {
                             Agri SupplyTrack
                         </span>
                         <p className="text-gray-600 text-sm">
-                            © 2024 -2026 TechCrafters. All Rights Reserved.
+                            © 2026 ❤️ All Rights Reserved.
                         </p>
                     </div>
 
