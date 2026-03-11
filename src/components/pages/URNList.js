@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Dcontext } from '../../context/DataContext';
 import LoadingPage from './Loading';
 import { Factory, MapPin, Search } from 'lucide-react';
 
 const BatchList = () => {
-  const { } = useContext(Dcontext);
   const [batches, setBatches] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
