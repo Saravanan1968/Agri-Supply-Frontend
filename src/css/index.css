@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#F4F8F5] text-gray-800 font-body antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-background text-gray-200;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold text-gray-900 transition-colors duration-300;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    @apply text-gray-100;
+  }
+}
+
+@layer components {
+  .btn-primary-gradient {
+    @apply bg-gradient-primary text-white font-medium py-2 px-6 rounded-full hover:shadow-glow hover:scale-105 transition-all duration-300 ease-out;
+  }
+
+  .glass-card {
+    @apply bg-white/70 dark:bg-glass backdrop-blur-md border border-gray-200 dark:border-glass-border shadow-lg dark:shadow-glass rounded-2xl transition-colors duration-300;
+  }
+
+  .glass-input {
+    @apply bg-gray-50 dark:bg-background-lighter/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300;
+  }
+
+  .nav-link-custom {
+    @apply text-gray-300 hover:text-white transition-colors relative;
+  }
+
+  .nav-link-custom::after {
+    content: '';
+    @apply absolute left-0 bottom-[-4px] w-0 h-[2px] bg-secondary transition-all duration-300;
+  }
+
+  .nav-link-custom:hover::after {
+    @apply w-full;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background-darker;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full hover:bg-gray-600;
+}
