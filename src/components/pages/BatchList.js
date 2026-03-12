@@ -124,13 +124,21 @@ const BatchList = () => {
       const data = await response.json();
 
       if (data.success) {
-        alert(`Notification successfully dispatched to recipients for ${batch.id}!`);
+        if (data.details.emailSent && data.details.smsSuccess) {
+          alert(`Notifications dispatched successfully to all channels for ${batch.id}!`);
+        } else if (data.details.emailSent) {
+          alert(`Email sent successfully for ${batch.id}, but SMS failed: ${data.details.smsError || 'Unknown error'}`);
+        } else if (data.details.smsSuccess) {
+          alert(`SMS sent successfully for ${batch.id}, but Email failed: ${data.details.emailError || 'Unknown error'}`);
+        } else {
+          alert(`Status updated, but notifications failed to send.`);
+        }
       } else {
-        alert('Failed to send notification: ' + data.message);
+        alert('Failed to process notifications: ' + (data.message || 'Unknown backend error'));
       }
     } catch (error) {
       console.error("Error triggering notification API", error);
-      alert("Server Error: Make sure the backend is responding.");
+      alert("Server Error: Make sure the backend is responding and check logs.");
     } finally {
       setIsNotifying(false);
     }
