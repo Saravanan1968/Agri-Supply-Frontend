@@ -72,8 +72,8 @@ const CreateProduceData = () => {
     "Produce - Wheat Grains",
     "Produce - Corn/Maize",
     "Dairy - Fresh Milk",
-    "AgriSupply - Organic Fertilizer",
-    "AgriSupply - Seed Packets",
+    "TerraVerify - Organic Fertilizer",
+    "TerraVerify - Seed Packets",
   ];
 
   const handleQuantityChange = (produceName, value) => {

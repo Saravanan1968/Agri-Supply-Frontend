@@ -56,7 +56,7 @@ const Header = () => {
                             <Leaf className="text-white" size={24} />
                         </div>
                         <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#2E7D32] to-[#1B5E20]">
-                            Agri<span className="text-[#4CAF50]">SupplyTrack</span>
+                            Terra<span className="text-[#4CAF50]">Verify</span>
                         </span>
                     </Link>
 
