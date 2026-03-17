@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoadingOverlay from "./ResponseWaiting";
-import { User, Lock, ArrowRight, CheckCircle } from 'lucide-react';
+import { User, Lock, ArrowRight } from 'lucide-react';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -62,35 +62,15 @@ const LoginPage = () => {
         </div>
 
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-primary-light backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-              Next Gen SCM Platform
-            </div>
+          <div className="space-y-6 animate-fade-in-up">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              Secure <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-secondary to-primary-light bg-[length:200%_auto] animate-gradient">
-                Agriculture Supply Chain
+                TerraVerify
               </span>
             </h1>
             <p className="text-xl text-gray-400 max-w-lg leading-relaxed">
-              Track agricultural produce from origin to consumer with uncompromised transparency, security, and real-time analytics powered by Blockchain.
+              We build a tamper-proof digital system to verify and monitor excavation transport trips.
             </p>
-
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 text-gray-300">
-                <CheckCircle className="text-primary-light" size={20} />
-                <span>Real-time Tracking</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <CheckCircle className="text-primary-light" size={20} />
-                <span>Anti-counterfeit</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <CheckCircle className="text-primary-light" size={20} />
-                <span>Smart Contracts</span>
-              </div>
-            </div>
           </div>
 
           {/* Login Card */}
